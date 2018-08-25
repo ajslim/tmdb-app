@@ -6,7 +6,6 @@ export default {
     return new Promise((resolve) => {
       axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
         .then((response) => {
-          console.log(response);
           resolve(response.data.genres);
         })
         .catch((error) => {
