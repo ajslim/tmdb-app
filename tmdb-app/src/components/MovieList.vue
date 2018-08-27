@@ -50,9 +50,14 @@ export default {
     filteredMovies() {
       return this.allMovies
         // Return only movies of the checked genres
-        .filter(movie => intersection(
-          this.checkedGenres,
-          movie.genre_ids).length > 0,
+        .filter((movie) => {
+          if (this.checkedGenres.length > 0) {
+            return intersection(
+              this.checkedGenres,
+              movie.genre_ids).length > 0;
+          }
+          return true;
+        },
         )
         // Filter by minimum rating
         .filter(movie => movie.vote_average > this.minimumRating)
