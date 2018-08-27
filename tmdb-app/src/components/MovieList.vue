@@ -1,11 +1,15 @@
 <template>
-  <div class="hello">
-    <label for="rating">Minimum Rating</label>
-    <input type="range" id="rating" name="rating"
-           v-model="minimumRating"
-           min="0" max="10" step="1" />
-    <div>{{ minimumRating }}</div>
-    <div class="genres clearfix">
+  <div>
+    <h1>The Movie Database: Now playing</h1>
+    <div class="row">
+      <label for="rating">Minimum Rating</label>
+      <div>{{ minimumRating }}
+      <input type="range" id="rating" name="rating"
+             v-model="minimumRating"
+             min="0" max="10" step="1" />
+      </div>
+    </div>
+    <div class="row genres clearfix">
       <label v-for="genre in genres" :key="genre.id">
         <input :id="`genre-${genre.name}`"
                :value="genre.id"
@@ -14,9 +18,12 @@
         {{ genre.name }}
       </label>
     </div>
-    <div v-for="movie in filteredMovies" :key="movie.id">
-      <h3>{{ movie.original_title }}</h3>
-      <img :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="poster" />
+    <div class="row" v-for="movie in filteredMovies" :key="movie.id">
+      <img class="posterImage two columns" :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="poster" />
+      <div class="ten columns">
+        <h5>{{ movie.original_title }}</h5>
+        {{ movie.dates }}
+      </div>
     </div>
   </div>
 </template>
@@ -70,33 +77,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
   .genres label {
     width: 200px;
     float: left;
     text-align: left;
-  }
-
-  h1, h2 {
-    font-weight: normal;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
   }
 </style>
