@@ -30,10 +30,7 @@
 
 <script>
 import Tmdb from '../services/TmdbService';
-
-function intersection(array1, array2) {
-  return array1.filter(n => array2.indexOf(n) > -1);
-}
+import Utility from '../services/UtilityService';
 
 export default {
   name: 'MovieList',
@@ -52,7 +49,7 @@ export default {
         // Return only movies of the checked genres
         .filter((movie) => {
           if (this.checkedGenres.length > 0) {
-            return intersection(
+            return Utility.intersection(
               this.checkedGenres,
               movie.genre_ids).length > 0;
           }
